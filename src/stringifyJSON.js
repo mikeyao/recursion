@@ -6,14 +6,11 @@
 var stringifyJSON = function(obj) {
   // your code goes here
 
-  if (typeof(obj) === "number" || typeof(obj) == "boolean"){
-    return obj.toString();
+  if (typeof(obj) === "number" || typeof(obj) === "boolean" || obj === null){
+    return String(obj);
   }
   else if (typeof(obj) === "string"){
-    return '"' + obj + '"';
-  }
-  else if (obj === null){
-    return "null";
+    return "\"" + obj + "\"";
   }
   else if (Array.isArray(obj)){
     var result = '';
@@ -21,7 +18,7 @@ var stringifyJSON = function(obj) {
       result = stringifyJSON(obj[0]);
     }
     for (var i = 1; i < obj.length; i++){
-      result = result + ',' + stringifyJSON(obj[i]);
+      result += ',' + stringifyJSON(obj[i]);
     }
     return '[' + result + ']';
   }

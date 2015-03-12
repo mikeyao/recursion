@@ -7,4 +7,16 @@
 var getElementsByClassName = function(className
 ){
   // your code here
+  var results = [];
+
+  function helperFun(node){
+    if (_.contains(node.classList, className)){
+      results.push(node);
+    }
+    _.each(node.childNodes, helperFun);
+  }
+
+  helperFun(document.body);
+  return results;
+
 };
