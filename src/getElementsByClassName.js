@@ -11,31 +11,17 @@ var getElementsByClassName = function(className
 
   var helpFun = function(node){
     // Check if the className belongs to the current element
-    var isExist = false;
-    var classList = node.classList;
-
-    if (classList != undefined) {
-      for (var i = 0; i < classList.length; i++){
-        if (className === classList[i]){
-          isExist = true;
-          break;
-        }
-      }
-      if (isExist) {
-        // console.log(node);
-        result.push(node);
-      }
+    if (_.contains(node.classList, className)) {
+      result.push(node);
     }
-    
+
+    //Recursive calling on childNodes of the element
     if (node.hasChildNodes()) {
-      var children = node.childNodes;
-      for (var i = 0; i < children.length; i++){
-        helpFun(children[i]);
-      }
+      _.each(node.childNodes, helpFun);
     }
-
   };
-  helpFun(document.body);
 
+  helpFun(document.body);
   return result;
+  
 };
